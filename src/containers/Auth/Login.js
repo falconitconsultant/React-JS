@@ -7,6 +7,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { UpdateStore } from "../../StoreContext";
 
 // makeStyles from material UI to add custom styling
 const useStyles = makeStyles({
@@ -46,6 +47,8 @@ const useStyles = makeStyles({
 const Login = () => {
   // intializing useStyle object
   const classes = useStyles();
+  // getting update store function from update store context
+  const updateStore = UpdateStore();
 
   // All the required states for registeration
   const [email, setEmail] = useState("");
@@ -64,7 +67,9 @@ const Login = () => {
     // Using axios to post data on server and handling the response
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/user/login`, data)
-      .then((data) => console.log("success: ", data))
+      .then((response) => {
+        updateStore({ loggedIn: true, user: response.data });
+      })
       .catch((data) => console.log("error:", data));
   };
 

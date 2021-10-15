@@ -6,7 +6,7 @@ import { Grid, Typography, Divider, IconButton } from "@material-ui/core";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // makeStyles from material UI to add custom styling
 const useStyles = makeStyles({
@@ -46,6 +46,8 @@ const useStyles = makeStyles({
 const Register = () => {
   // intializing useStyle object
   const classes = useStyles();
+  // intializing use history object
+  const history = useHistory();
 
   // All the required states for registeration
   const [firstname, setFirstname] = useState("");
@@ -76,7 +78,10 @@ const Register = () => {
     // Using axios to post data on server and handling the response
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/user/register`, formdata)
-      .then((data) => console.log("success: ", data))
+      .then((response) => {
+        response.data.user && alert("User succesfully created!");
+        history.push("/");
+      })
       .catch((data) => console.log("error:", data));
   };
 
