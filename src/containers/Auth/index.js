@@ -3,13 +3,14 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Routes
-import Auth from "../containers/Auth/index.js";
+import Login from "./Login";
+import Register from "./Register";
 
 const index = () => {
   return (
     <Switch>
-      {/* auth routes mainly Login signup  */}
-      <Auth />
+      <Route exact path="/" component={Login} />
+      <Route path="/register" component={Register} />
     </Switch>
   );
 };
