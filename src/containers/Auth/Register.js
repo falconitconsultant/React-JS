@@ -1,54 +1,19 @@
-//init
+// init
 import React, { useState } from "react";
-import axios from "axios";
 import InputWithLabel from "../../components/inputWithLabel";
 import { Grid, Typography, Divider, IconButton } from "@material-ui/core";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link, useHistory } from "react-router-dom";
-
-// makeStyles from material UI to add custom styling
-const useStyles = makeStyles({
-  container: {
-    width: "50%",
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    color: "#d10248",
-  },
-  form: {
-    marginTop: "auto",
-    marginBottom: "auto",
-    width: "75%",
-    textAlign: "center",
-  },
-  btn: {
-    width: "200px",
-    color: "white",
-    cursor: "pointer",
-    backgroundColor: "#d10248",
-    border: "2px solid #d10248",
-    padding: "15px",
-    borderRadius: "30px",
-    transitionProperty: "#d10248 #d10248",
-    transitionDuration: "0.5s",
-    marginTop: "10px",
-    "&:hover": {
-      backgroundColor: "transparent",
-      color: "#d10248",
-    },
-    // add more classes here
-  },
-});
+import { useHistory } from "react-router-dom";
+import { onFaceookClick } from "../../utils/onFacebookClick";
+import { onGoogleClick } from "../../utils/onGoogleClick";
+import { onSubmit } from "../../utils/onRegisterSubmit";
+import { useStyles } from "../../styles/register";
 
 // Register component
-const Register = () => {
+const Register = ({ setCurrentPage }) => {
   // intializing useStyle object
   const classes = useStyles();
-  // intializing use history object
-  const history = useHistory();
-
   // All the required states for registeration
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -61,54 +26,29 @@ const Register = () => {
   const [picture, setPicture] = useState([]);
   // add more states here
 
-  // on form submit Function
-  const onSubmit = (e) => {
-    // prevent default so page doesn't reload
-    e.preventDefault();
-    // creating form data and appending states to it
-    const formdata = new FormData();
-    formdata.append("firstname", firstname);
-    formdata.append("lastname", lastname);
-    formdata.append("email", email);
-    formdata.append("password", password);
-    formdata.append("phone", phone);
-    formdata.append("address", address);
-    formdata.append("description", description);
-    formdata.append("picture", picture, picture.name);
-    // Using axios to post data on server and handling the response
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/user/register`, formdata)
-      .then((response) => {
-        response.data.user && alert("User succesfully created!");
-        history.push("/");
-      })
-      .catch((data) => console.log("error:", data));
-  };
-
-  // on facbook button click
-  const onFaceookClick = (e) => {
-    // Using axios to connect with facebook
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/user/auth/facebook`)
-      .then((data) => console.log("success: ", data))
-      .catch((data) => console.log("error:", data));
-  };
-
-  // on google button click
-  const onGoogleClick = (e) => {
-    // Using axios to connect with google
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/user/auth/google`)
-      .then((data) => console.log("success: ", data))
-      .catch((data) => console.log("error:", data));
-  };
-
   // returning jsx
   return (
     // main conatiner
     <div className={classes.container}>
       {/* Sign up form */}
-      <form onSubmit={onSubmit} className={classes.form}>
+      <form
+        onSubmit={(e) =>
+          onSubmit(
+            e,
+            firstname,
+            lastname,
+            email,
+            password,
+            confirmPassword,
+            phone,
+            address,
+            description,
+            picture,
+            setCurrentPage
+          )
+        }
+        className={classes.form}
+      >
         {/* main Heading */}
         <Typography variant="h2" gutterBottom>
           Register
@@ -123,8 +63,6 @@ const Register = () => {
               name="firstName"
               type="text"
               handleChange={(e) => setFirstname(e.target.value)}
-              // error={errors["firstName"] ? true : false}
-              // errorMessage={errors["firstName"]}
             />
           </Grid>
           <Grid item zeroMinWidth xs>
@@ -135,8 +73,6 @@ const Register = () => {
               name="lastName"
               type="text"
               handleChange={(e) => setLastname(e.target.value)}
-              // error={errors["lastName"] ? true : false}
-              // errorMessage={errors["lastName"]}
             />
           </Grid>
         </Grid>

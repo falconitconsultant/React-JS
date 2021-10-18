@@ -1,51 +1,11 @@
 // Init
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
+import { UseStyles } from "../../styles/main";
 // Routes
 import Login from "./Login";
 import Register from "./Register";
 
-// makeStyles from material UI for styling
-const UseStyles = makeStyles({
-  container: {
-    width: "100vw",
-    display: "flex",
-  },
-  left: {
-    width: "50%",
-    height: "100vh",
-    backgroundColor: "#d10248",
-    color: "white",
-    display: "grid",
-    placeItems: "center",
-  },
-  leftContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  btn: {
-    width: "200px",
-    color: "white",
-    cursor: "pointer",
-    backgroundColor: "#d10248",
-    border: "2px solid #d10248",
-    padding: "15px",
-    borderRadius: "30px",
-    transitionProperty: "#d10248 #d10248",
-    transitionDuration: "0.5s",
-    marginTop: "10px",
-    border: "2px solid white",
-    "&:hover": {
-      backgroundColor: "white",
-      color: "#d10248",
-    },
-    // add more classes here
-  },
-});
 // Main component
 const Main = () => {
   // intializing useStyle object
@@ -75,7 +35,11 @@ const Main = () => {
         </div>
         {/* form on the right */}
       </div>
-      {currentPage === "login" ? <Login /> : <Register />}
+      {currentPage === "login" ? (
+        <Login />
+      ) : (
+        <Register setCurrentPage={setCurrentPage} />
+      )}
     </div>
   );
 };

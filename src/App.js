@@ -3,15 +3,13 @@ import React, { useEffect } from "react";
 import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UpdateStore } from "./StoreContext";
-import axios from "axios";
+import api from "./api";
 // Files
 import Index from "./routes/index";
-import "./css/index.css";
+import "./styles/index.css";
 
 // Component
 function App() {
-  // setting axios default with credential true to get lgged in user
-  axios.defaults.withCredentials = true;
   // getting update store function from update store context
   const updateStore = UpdateStore();
 
@@ -21,9 +19,7 @@ function App() {
 
   // checking if user is already logged in
   const checkLogin = async () => {
-    const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/user/loggedin`
-    );
+    const result = await api("get", "/user/loggedin");
     // settin user value in store if logged in
     if (!result.data.error) {
       updateStore({ loggedIn: true, user: result.data.user });

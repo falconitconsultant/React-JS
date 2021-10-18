@@ -1,5 +1,5 @@
 {
-  "name": "module-react",
+  "name": "react-js",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000/",
