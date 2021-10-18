@@ -12,7 +12,7 @@ import { UpdateStore } from "../../StoreContext";
 // makeStyles from material UI to add custom styling
 const useStyles = makeStyles({
   container: {
-    width: "100%",
+    width: "50%",
     height: "100vh",
     display: "flex",
     justifyContent: "center",
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   form: {
     marginTop: "auto",
     marginBottom: "auto",
-    width: "40%",
+    width: "75%",
     textAlign: "center",
   },
   btn: {
@@ -98,7 +98,7 @@ const Login = () => {
       {/* Login form */}
       <form onSubmit={onSubmit} className={classes.form}>
         {/* main Heading */}
-        <Typography variant="h2" className={classes.formHeading} gutterBottom>
+        <Typography variant="h2" gutterBottom>
           Login
         </Typography>
         {/* All fields */}
@@ -118,17 +118,7 @@ const Login = () => {
           type="password"
           handleChange={(e) => setPassword(e.target.value)}
         />
-
         {/* add new fields here */}
-        {/* register page link */}
-        <div style={{ textAlign: "left", marginLeft: 10, marginTop: -15 }}>
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "#d10248" }}
-          >
-            Click here to register
-          </Link>
-        </div>
         {/* login button */}
         <button type="submit" className={classes.btn}>
           Login

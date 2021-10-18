@@ -5,7 +5,7 @@ import { Store } from "../StoreContext";
 import LandingPage from "../containers/LandingPage";
 
 // Routes
-import Auth from "../containers/Auth/index.js";
+import Auth from "../containers/Auth/Main.js";
 
 const index = () => {
   // getting store out of store context

@@ -11,7 +11,7 @@ import { Link, useHistory } from "react-router-dom";
 // makeStyles from material UI to add custom styling
 const useStyles = makeStyles({
   container: {
-    width: "100%",
+    width: "50%",
     height: "100vh",
     display: "flex",
     justifyContent: "center",
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   form: {
     marginTop: "auto",
     marginBottom: "auto",
-    width: "40%",
+    width: "75%",
     textAlign: "center",
   },
   btn: {
@@ -110,7 +110,7 @@ const Register = () => {
       {/* Sign up form */}
       <form onSubmit={onSubmit} className={classes.form}>
         {/* main Heading */}
-        <Typography variant="h2" className={classes.formHeading} gutterBottom>
+        <Typography variant="h2" gutterBottom>
           Register
         </Typography>
         {/* All fields */}
@@ -202,13 +202,7 @@ const Register = () => {
           handleChange={(e) => setPicture(e.target.files[0])}
         />
         {/* add new fields here */}
-        {/* Login page link */}
-        <div style={{ textAlign: "left", marginLeft: 10, marginTop: -15 }}>
-          <Link to="/" style={{ textDecoration: "none", color: "#d10248" }}>
-            Click here to login
-          </Link>
-        </div>
-        {/* regiter button */}
+        {/* register button */}
         <button type="submit" className={classes.btn}>
           Register
         </button>
