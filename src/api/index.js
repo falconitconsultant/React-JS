@@ -4,9 +4,7 @@ import { toast } from "react-toastify";
 
 const api = async (method = "get", uri, body) => {
   // Default setting for production
-  if (window.location.hostname !== "localhost") {
-    axios.defaults.withCredentials = true;
-  }
+  axios.defaults.withCredentials = true;
 
   // API Call
   const url = process.env.REACT_APP_BASE_URL + uri;

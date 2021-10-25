@@ -9,7 +9,7 @@ import { onSubmit } from "../../utils/onLoginSubmit";
 import { onFaceookClick } from "../../utils/onFacebookClick";
 import { onGoogleClick } from "../../utils/onGoogleClick";
 import { useStyles } from "../../styles/login";
-
+import ForgetPasswordModal from "../../components/ForgetPasswordModal";
 // Login component
 const Login = () => {
   // intializing useStyle object
@@ -20,6 +20,8 @@ const Login = () => {
   // All the required states for registeration
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [forgetPassEmail, setForgetPassEmail] = useState("");
   // add more states here
 
   // returning jsx
@@ -53,6 +55,23 @@ const Login = () => {
           handleChange={(e) => setPassword(e.target.value)}
         />
         {/* add new fields here */}
+        {/* forget password open model */}
+        <div style={{ width: "100%", textAlign: "left" }}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setOpenModal(true)}
+          >
+            Forget Password?
+          </span>
+        </div>
+        <br />
+        {/* forget password modal */}
+        <ForgetPasswordModal
+          open={openModal}
+          setOpen={setOpenModal}
+          email={forgetPassEmail}
+          setEmail={setForgetPassEmail}
+        />
         {/* login button */}
         <button type="submit" className={classes.btn}>
           Login
