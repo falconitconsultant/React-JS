@@ -1,5 +1,5 @@
 // Init
-import React from "react";
+import React from 'react';
 
 // Component
 export default function Header() {

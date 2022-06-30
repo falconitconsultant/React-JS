@@ -1,8 +1,8 @@
 // Init
-import React from "react";
+import React from 'react';
 
 // Importing Components
-import Header from "../components/Header";
+import Header from '../components/Header';
 
 // Home Component
 export default function Home() {
